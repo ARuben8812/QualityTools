@@ -1,5 +1,5 @@
         let currentSampleCount = 8;
-
+        
         window.onload = function() {
             const dateInput = document.getElementById('input_fecha');
             dateInput.valueAsDate = new Date();
@@ -203,9 +203,9 @@
             const mapCheck = (val, targetC, targetNC) => {
                 if (val === 'OK') {
                     document.getElementById(targetC).innerText = 'X';
-                    document.getElementById(targetNC).innerText = '';
+                    document.getElementById(targetNC).innerText = '--';
                 } else if (val === 'NOK') {
-                    document.getElementById(targetC).innerText = '';
+                    document.getElementById(targetC).innerText = '--';
                     document.getElementById(targetNC).innerText = 'X';
                 } else if (val === 'NA') {
                     document.getElementById(targetC).innerText = 'NA';
