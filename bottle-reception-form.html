@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Calidad - Recepción de Botellas</title>
+    <script src="Scripts/logics-1.js"></script>
+    <link rel="stylesheet" href="stylesheet-bottles-form.css">
+    
+</head>
+<body>
+
+    <!-- ==================== FORMULARIO ==================== -->
+    <div class="container">
+        <h2>Recepción de Botellas QA</h2>
+        <p style="font-size: 0.85rem; color: #666;">Ingresa la información para realizar los cálculos automáticos y generar el reporte oficial.</p>
+
+        <!-- Datos Generales -->
+        <div class="form-section">
+            <h3>1. Datos Generales de Recepción</h3>
+            <div class="grid-3">
+                <div class="form-group">
+                    <label>Logo</label>
+                    <label class="file-upload-btn">
+                        📷 Cargar Logo...
+                        <input type="file" id="logo_input" accept="image/*" onchange="loadLogo(event)" style="display: none;">
+                    </label>
+                    <span id="logo_status" style="font-size: 0.75rem; color: #2b6cb0; margin-top: 4px;"></span>
+                </div>
+                <div class="form-group">
+                    <label>Fecha:</label>
+                    <input type="date" id="input_fecha" onchange="onDateChange()">
+                </div>
+                <div class="form-group">
+                    <label>Cliente:</label>
+                    <input type="text" id="input_cliente" placeholder="Nombre del cliente" list="clientes_sugeridos">
+                    <datalist id="clientes_sugeridos">
+                        <option value="Lander & Vera"></option>
+                        <option value="Chocomilk"></option>
+                        <option value="MCDA"></option>
+                        <option value="MarFran"></option>
+                        <option value="CDE"></option>
+                        <option value="Edferfra"></option>
+                        <option value="Celiveca"></option>
+                        <option value="Alianza Plast"></option>
+                        <option value="Vidosa"></option>
+                        <option value="Vidrio Lux"></option>
+                        <option value="Eloplast"></option>
+                        <option value="Produvisa"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label>Proveedor:</label>
+                    <input type="text" id="input_proveedor" placeholder="Nombre del proveedor" list="clientes_sugeridos">
+                    
+                </div>
+                <div class="form-group">
+                    <label>Producto:</label>
+                    <input type="text" id="input_producto" placeholder="Nombre del producto">
+                </div>
+                <div class="form-group">
+                    <label style="color: #2b6cb0;">Presentación (Rellena P. Lleno):</label>
+                    <input type="number" id="input_presentacion" placeholder="Ej. 750 ml" oninput="autofillPesoLleno()" list="presentacion_sugerida">
+                    <datalist id="presentacion_sugerida">
+                        <option value="1750"></option>
+                        <option value="1000"></option>
+                        <option value="750"></option>
+                        <option value="700"></option>
+                        <option value="350"></option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label>Cantidad de Botellas:</label>
+                    <input type="number" id="input_cant_botellas" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label>Número de Paletas:</label>
+                    <input type="number" id="input_num_paletas" value=18>
+                </div>
+                <div class="form-group">
+                    <label>Densidad del Agua:</label>
+                    <input type="text" id="input_densidad" value="1 g/ml">
+                </div>
+                <div class="form-group">
+                    <label>Código:</label>
+                    <input type="text" id="input_codigo" value="---">
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Botella:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="tipo_botella" value="PET" checked> PET</label>
+                        <label><input type="radio" name="tipo_botella" value="VIDRIO"> VIDRIO</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label style="color: #2b6cb0;">Código Juliano (Automático):</label>
+                    <input type="number" id="input_cod_juliano">
+                </div>
+                <div class="form-group">
+                    <label>Lote:</label>
+                    <input type="text" id="input_lote">
+                </div>
+                <div class="form-group">
+                    <label>Número Factura:</label>
+                    <input type="number" id="input_num_factura">
+                </div>
+                <div class="form-group">
+                    <label>Número de QR:</label>
+                    <input type="text" id="input_num_qr">
+                </div>
+            </div>
+        </div>
+
+        <!-- Parámetros Cualitativos -->
+        <div class="form-section">
+            <h3>2. Evaluación de Parámetros Cualitativos</h3>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Punto de Llenado:</label>
+                    <select id="param_punto_llenado">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Punto Frágil:</label>
+                    <select id="param_punto_fragil">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Vidrio Frío:</label>
+                    <select id="param_vidrio_frio">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Dimensiones:</label>
+                    <select id="param_dimensiones">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Superficie Regular:</label>
+                    <select id="param_superficie_regular">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Muestras -->
+        <div class="form-section">
+            <h3>3. Mediciones y Ensayos de Muestras</h3>
+            
+            <div style="margin-bottom: 15px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <label style="font-weight: bold;">Seleccionar cantidad de muestras:</label>
+                <select id="sample_count_select" onchange="changeSampleCount()" style="padding: 5px 10px; font-weight: bold;">
+                    <option value="8" selected>8 Muestras</option>
+                    <option value="13">13 Muestras</option>
+                </select>
+            </div>
+
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">#</th>
+                            <th>P VACÍO (g)</th>
+                            <th>CAVIDAD</th>
+                            <th>OBSERVACIÓN</th>
+                            <th>P LLENO</th>
+                            <th>VOLUMEN (ml)</th>
+                            <th>DIF (ml)</th>
+                            <th>DESV</th>                    
+                        </tr>
+                    </thead>
+                    <tbody id="samplesTbody">
+                        <!-- Generado dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="summary-box">
+                <div class="summary-card">
+                    <span>Vol. Promedio F.P. (ml)</span>
+                    <div id="res_vol_promedio">0.00</div>
+                </div>
+                <div class="summary-card">
+                    <span>Promedio Diferencia</span>
+                    <div id="res_dif_promedio">0.00</div>
+                </div>
+                <div class="summary-card">
+                    <span>Desviación Máxima</span>
+                    <div id="res_desv_maxima">0.00</div>
+                </div>
+            </div>
+
+            <div class="grid-3" style="margin-top: 15px;">
+                <div class="form-group">
+                    <label>F.P. Ref (mm):</label>
+                    <input type="number" id="input_fp_ref">
+                </div>
+                <div class="form-group">
+                    <label style="color: #2b6cb0;">P. Vacío Mín / Máx (gr) [Automático]:</label>
+                    <input type="text" id="input_p_vacio_minmax" readonly placeholder="Mín / Máx">
+                </div>
+                <div class="form-group">
+                    <label>Profundidad Llenado Mín / Máx (mm):</label>
+                    <input type="text" id="input_prof_llenado_minmax">
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 10px;">
+                <label>Observaciones Generales:</label>
+                <textarea id="input_observaciones_gen" rows="2" placeholder="Observaciones adicionales del proceso..."></textarea>
+            </div>
+        </div>
+
+        <button class="btn-action" onclick="generateAndPrintReport()">🖨️ GENERAR E IMPRIMIR REPORTE</button>
+    </div>
+
+
+    <!-- ============ REPORTE IMPRIMIBLE ============= -->
+    <div id="printableReport">
+        <div>
+            <!-- Encabezado -->
+            <table class="rpt-table">
+                <tr>
+                    <td style="width: 20%; text-align: center; vertical-align: middle;">
+                        <img id="rpt_logo_img" src="#" style="max-width: 100%; max-height: 45px; display: none; margin: 0 auto;">
+                        <strong id="rpt_logo_text" style="font-size: 20px;">LANDER & VERA</strong>
+                    </td>
+                    <td style="width: 50%; text-align: center; font-size: 20px; font-weight: bold;">
+                        RECEPCIÓN DE BOTELLAS
+                    </td>
+                    <td style="width: 30%; padding: 0;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 16px;">
+                            <tr><td style="border-bottom: 1px solid black; border-right: none; font-weight: bold;">CODIGO:</td><td style="border-bottom: 1px solid black; border-left: none; text-align: right;">LV-FO-CC-008-00</td></tr>
+                            <tr><td style="border-bottom: 1px solid black; border-right: none; font-weight: bold;">N° DE REV:</td><td style="border-bottom: 1px solid black; border-left: none; text-align: right;">0</td></tr>
+                            <tr><td style="border-right: none; font-weight: bold;">PAGINA:</td><td style="border-left: none; text-align: right;">1 de 1</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Datos Generales -->
+            <table class="rpt-table">
+                <tr>
+                    <td style="width: 38%;"><strong>FECHA:</strong> <span id="rpt_fecha"></span></td>
+                    <td style="width: 32%;"><strong>CANTIDAD BOTELLAS:</strong> <span id="rpt_cant_botellas"></span></td>
+                    <td style="width: 30%;"><strong>CODIGO JULIANO:</strong> <span id="rpt_cod_juliano"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>CLIENTE:</strong> <span id="rpt_cliente"></span></td>
+                    <td><strong>N° DE PALETAS:</strong> <span id="rpt_num_paletas"></span></td>
+                    <td><strong>LOTE:</strong> <span id="rpt_lote"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>PROVEEDOR:</strong> <span id="rpt_proveedor"></span></td>
+                    <td><strong>DENSIDAD DEL AGUA:</strong> <span id="rpt_densidad">1 g/ml</span></td>
+                    <td><strong>N° DE FACTURA:</strong> <span id="rpt_num_factura"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>PRODUCTO:</strong> <span id="rpt_producto"></span></td>
+                    <td><strong>CODIGO:</strong> <span id="rpt_codigo">---</span></td>
+                    <td><strong>N°CONTROL:</strong> ---</td>
+                </tr>
+                <tr>
+                    <td><strong>PRESENTACIÓN:</strong> <span id="rpt_presentacion"></span></td>
+                    <td>
+                        <strong>BOT. PET</strong> <span id="rpt_pet_check">[ ]</span> &nbsp;&nbsp;
+                        <strong>BOT. VIDRIO</strong> <span id="rpt_vidrio_check">[ ]</span>
+                    </td>
+                    <td><strong>#QR:</strong> <span id="rpt_num_qr"></span></td>
+                </tr>
+            </table>
+
+            <!-- Parámetros CUMPLE / NO CUMPLE -->
+            <table class="rpt-table">
+                <tr>
+                    <td style="width: 40%; padding: 0; vertical-align: top;">
+                        <table class="rpt-check-table">
+                            <tr style="font-weight: bold;">
+                                <td style="width: 50%;">PARAMETROS</td>
+                                <td style="width: 25%;">CUMPLE</td>
+                                <td style="width: 25%;">NO CUMPLE</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">PUNTO DE LLENADO:</td>
+                                <td id="rpt_pj_c"></td><td id="rpt_pj_nc"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">VIDRIO FRIO:</td>
+                                <td id="rpt_vf_c"></td><td id="rpt_vf_nc"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">SUPERFICIE REGULAR:</td>
+                                <td id="rpt_sr_c"></td><td id="rpt_sr_nc"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 20%; padding: 0; vertical-align: top;"></td>
+                    <td style="width: 40%; padding: 0; vertical-align: top;">
+                        <table class="rpt-check-table">
+                            <tr style="font-weight: bold;">
+                                <td style="width: 50%;">PARAMETROS</td>
+                                <td style="width: 25%;">CUMPLE</td>
+                                <td style="width: 25%;">NO CUMPLE</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">PUNTO FRAGIL:</td>
+                                <td id="rpt_pf_c"></td><td id="rpt_pf_nc"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">DIMENSIONES:</td>
+                                <td id="rpt_dim_c"></td><td id="rpt_dim_nc"></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: none;">&nbsp;</td>
+                                <td style="border-bottom: none;"></td><td style="border-bottom: none;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Tabla de Muestras -->
+            <table class="rpt-samples">
+                <thead>
+                    <tr style="font-weight: bold;">
+                        <th style="width: 8%;">MUESTRA</th>
+                        <th style="width: 10%;">P VACIO</th>
+                        <th style="width: 10%;">P LLENO</th>
+                        <th style="width: 11%;">VOLUMEN</th>
+                        <th style="width: 9%;">DIF</th>
+                        <th style="width: 9%;">DESV</th>
+                        <th style="width: 11%;">CAVIDAD</th>
+                        <th style="width: 32%;">OBSERVACIÓN</th>
+                    </tr>
+                </thead>
+                <tbody id="rpt_samples_body">
+                    <!-- Se llena dinámicamente -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right; font-weight: bold;">Totales</td>
+                        <td id="rpt_tot_vol" class="font-bold"></td>
+                        <td id="rpt_tot_dif" class="font-bold"></td>
+                        <td id="rpt_tot_desv" class="font-bold"></td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!-- Secciones Inferiores -->
+            <table class="rpt-table">
+                <tr>
+                    <td style="width: 35%;"><strong>F.P. Ref (mm):</strong> <span id="rpt_fp_ref"></span></td>
+                    <td style="width: 35%;"><strong>Vol. Promedio F.P. (ml):</strong> <span id="rpt_vol_prom_fp"></span></td>
+                    <td style="width: 30%;"><strong>Des. Máx.:</strong> <span id="rpt_desv_max"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>P. Vacío Mín / Máx. (gr):</strong> <span id="rpt_p_vacio_minmax"></span></td>
+                    <td colspan="2"><strong>Profundidad Llenado Mín / Máx (mm):</strong> <span id="rpt_prof_minmax"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height: 150px; vertical-align: top;">
+                        <strong>Observaciones:</strong> <span id="rpt_observaciones_gen"></span>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="font-size: 8.5px; margin-top: 5px;">*F.P. = Filled Point (Punto de Llenado)</div>
+        </div>
+
+        <div class="rpt-signatures">
+            <div>REVISADO Y APROBADO POR: ___________________________</div>
+            <div>ALMACEN: ___________________________</div>
+        </div>
+    </div>    
+</body>
+</html>
