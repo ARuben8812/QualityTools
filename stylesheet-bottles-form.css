@@ -136,7 +136,7 @@
             }
             
             .rpt-table { width: 100%; border-collapse: collapse; margin-bottom: 4px; }
-            .rpt-table td, .rpt-table th { border: 1.5px solid black; padding: 4px 6px; font-size: 14px; text-align: left; vertical-align: middle; }
+            .rpt-table td, .rpt-table th { border: 1.5px solid black; padding: 4px 6px; font-size: 12px; text-align: left; vertical-align: middle; }
             
             .rpt-header { text-align: center; font-weight: bold; }
             .rpt-title { font-size: 16px; text-align: center; font-weight: bold; }
@@ -149,7 +149,7 @@
                 border: 1.5px solid black; 
                 text-align: center; 
                 padding: 4px 4px; 
-                font-size: 14px; 
+                font-size: 12px; 
             }
             .rpt-samples td:nth-child(8) {
     text-align: left !important; /* Para asegurar que prevalezca sobre el centro */
