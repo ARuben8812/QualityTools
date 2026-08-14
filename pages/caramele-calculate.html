@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculador de Gramos de Caramelo</title>
     <link href="../dist/output.css" rel="stylesheet" />
-
     <style>
       /* Quitar flechas en inputs de número */
       input[type="number"]::-webkit-inner-spin-button,
@@ -46,12 +45,17 @@
     <!-- ============================================ -->
     <!-- CONTENIDO PRINCIPAL                           -->
     <!-- ============================================ -->
-    <main class="min-h-screen py-4 sm:py-10 px-3 sm:px-6 flex items-center justify-center">
-      <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-4 sm:p-8 border border-slate-200/80">
-        
+    <main
+      class="min-h-screen py-4 sm:py-10 px-3 sm:px-6 flex items-center justify-center"
+    >
+      <div
+        class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-4 sm:p-8 border border-slate-200/80"
+      >
         <!-- Encabezado -->
         <header class="border-b border-slate-100 pb-4 mb-6">
-          <h1 class="text-lg sm:text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2.5">
+          <h1
+            class="text-lg sm:text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2.5"
+          >
             <span class="text-2xl sm:text-3xl">🧪</span>
             <span>Calculador de Gramos de Caramelo</span>
           </h1>
@@ -66,7 +70,10 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-5 mb-6">
           <!-- Fecha -->
           <div>
-            <label for="fecha" class="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
+            <label
+              for="fecha"
+              class="block text-xs sm:text-sm font-semibold text-slate-700 mb-1"
+            >
               Fecha
             </label>
             <input
@@ -78,7 +85,10 @@
 
           <!-- Color Obtenido -->
           <div>
-            <label for="colorObtenido" class="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
+            <label
+              for="colorObtenido"
+              class="block text-xs sm:text-sm font-semibold text-slate-700 mb-1"
+            >
               Color Obtenido
             </label>
             <input
@@ -86,14 +96,17 @@
               id="colorObtenido"
               step="any"
               min="0.001"
-              placeholder="Ej: 0.85"
+              placeholder="Ej: 31.5"
               class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xs sm:text-sm transition-all"
             />
           </div>
 
           <!-- Color Objetivo -->
           <div>
-            <label for="colorObjetivo" class="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
+            <label
+              for="colorObjetivo"
+              class="block text-xs sm:text-sm font-semibold text-slate-700 mb-1"
+            >
               Color Objetivo
             </label>
             <input
@@ -101,14 +114,17 @@
               id="colorObjetivo"
               step="any"
               min="0.001"
-              placeholder="Ej: 0.92"
+              placeholder="Ej: 29"
               class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-xs sm:text-sm transition-all"
             />
           </div>
 
           <!-- Volumen (L) -->
           <div>
-            <label for="volumen" class="block text-xs sm:text-sm font-semibold text-slate-700 mb-1">
+            <label
+              for="volumen"
+              class="block text-xs sm:text-sm font-semibold text-slate-700 mb-1"
+            >
               Volumen (L)
             </label>
             <input
@@ -125,9 +141,13 @@
         <!-- ========================================== -->
         <!-- CONSTANTES EDITABLES                       -->
         <!-- ========================================== -->
-        <section class="bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 mb-6">
+        <section
+          class="bg-slate-50 p-3.5 sm:p-4 rounded-xl border border-slate-200 mb-6"
+        >
           <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-            <span class="font-semibold text-slate-700 text-xs sm:text-sm flex items-center gap-1.5">
+            <span
+              class="font-semibold text-slate-700 text-xs sm:text-sm flex items-center gap-1.5"
+            >
               <span>⚙️</span> Constantes del Proceso
             </span>
             <button
@@ -140,7 +160,11 @@
           </div>
           <div class="grid grid-cols-2 gap-3 sm:gap-4">
             <div>
-              <label for="k1" class="block text-[11px] font-medium text-slate-500 mb-0.5">k1</label>
+              <label
+                for="k1"
+                class="block text-[11px] font-medium text-slate-500 mb-0.5"
+                >k1</label
+              >
               <input
                 type="number"
                 id="k1"
@@ -150,7 +174,11 @@
               />
             </div>
             <div>
-              <label for="k2" class="block text-[11px] font-medium text-slate-500 mb-0.5">k2</label>
+              <label
+                for="k2"
+                class="block text-[11px] font-medium text-slate-500 mb-0.5"
+                >k2</label
+              >
               <input
                 type="number"
                 id="k2"
@@ -165,30 +193,69 @@
         <!-- ========================================== -->
         <!-- RESULTADOS INTERFAZ                         -->
         <!-- ========================================== -->
-        <section id="resultados" class="bg-gradient-to-br from-blue-50 to-indigo-50/50 p-4 sm:p-5 rounded-xl border border-blue-100 shadow-sm">
-          <h2 class="font-bold text-blue-900 text-sm sm:text-base mb-3 flex items-center gap-2">
+        <section
+          id="resultados"
+          class="bg-gradient-to-br from-blue-50 to-indigo-50/50 p-4 sm:p-5 rounded-xl border border-blue-100 shadow-sm"
+        >
+          <h2
+            class="font-bold text-blue-900 text-sm sm:text-base mb-3 flex items-center gap-2"
+          >
             <span>📊</span> Resultados
           </h2>
-          
+
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-            <div class="bg-white p-3 rounded-lg border border-blue-100/80 shadow-2xs">
-              <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">log (Obtenido)</p>
-              <p id="logObt" class="text-base sm:text-lg font-mono font-bold text-slate-800 mt-0.5">—</p>
+            <div
+              class="bg-white p-3 rounded-lg border border-blue-100/80 shadow-2xs"
+            >
+              <p
+                class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"
+              >
+                log (Obtenido)
+              </p>
+              <p
+                id="logObt"
+                class="text-base sm:text-lg font-mono font-bold text-slate-800 mt-0.5"
+              >
+                —
+              </p>
             </div>
-            <div class="bg-white p-3 rounded-lg border border-blue-100/80 shadow-2xs">
-              <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">log (Objetivo)</p>
-              <p id="logObj" class="text-base sm:text-lg font-mono font-bold text-slate-800 mt-0.5">—</p>
+            <div
+              class="bg-white p-3 rounded-lg border border-blue-100/80 shadow-2xs"
+            >
+              <p
+                class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"
+              >
+                log (Objetivo)
+              </p>
+              <p
+                id="logObj"
+                class="text-base sm:text-lg font-mono font-bold text-slate-800 mt-0.5"
+              >
+                —
+              </p>
             </div>
-            <div class="bg-white p-3 rounded-lg border border-green-200/80 shadow-2xs">
-              <p class="text-[11px] font-semibold text-emerald-600 uppercase tracking-wider">Gramos Caramelo</p>
-              <p id="gramosCaramelo" class="text-base sm:text-lg font-mono font-bold text-emerald-700 mt-0.5">
+            <div
+              class="bg-white p-3 rounded-lg border border-green-200/80 shadow-2xs"
+            >
+              <p
+                class="text-[11px] font-semibold text-emerald-600 uppercase tracking-wider"
+              >
+                Gramos Caramelo
+              </p>
+              <p
+                id="gramosCaramelo"
+                class="text-base sm:text-lg font-mono font-bold text-emerald-700 mt-0.5"
+              >
                 <span id="gramosRedondeado">—</span>
-                <span id="gramosReal" class="text-xs font-normal text-slate-500 ml-1"></span>
+                <span
+                  id="gramosReal"
+                  class="text-xs font-normal text-slate-500 ml-1"
+                ></span>
               </p>
             </div>
           </div>
 
-          <!-- Botón Compartir Corregido -->
+          <!-- Botón Compartir -->
           <div class="mt-4 flex justify-end">
             <button
               type="button"
@@ -196,12 +263,14 @@
               class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-2.5 px-5 rounded-lg transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer"
             >
               <!-- Ícono SVG Corregido -->
-              <svg 
-                class="w-4 h-4 sm:w-5 sm:h-5 text-white fill-current shrink-0" 
-                viewBox="0 0 24 24" 
+              <svg
+                class="w-4 h-4 sm:w-5 sm:h-5 text-white fill-current shrink-0"
+                viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+                <path
+                  d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
+                />
               </svg>
               <span>Compartir Reporte</span>
             </button>
@@ -209,8 +278,12 @@
         </section>
 
         <!-- Mensaje de advertencia -->
-        <p id="mensajeAdvertencia" class="text-xs text-amber-600 mt-3 font-medium hidden flex items-center gap-1.5">
-          <span>⚠️</span> Complete Color Obtenido, Color Objetivo y Volumen para calcular.
+        <p
+          id="mensajeAdvertencia"
+          class="text-xs text-amber-600 mt-3 font-medium flex items-center gap-1.5"
+        >
+          <span>⚠️</span> Complete Color Obtenido, Color Objetivo y Volumen para
+          calcular.
         </p>
       </div>
     </main>
@@ -218,68 +291,157 @@
     <!-- ============================================ -->
     <!-- PLANTILLA DE COMPARTIR OCULTA (SOLO HTML2CANVAS) -->
     <!-- ============================================ -->
-    <div style="position: absolute; left: -9999px; top: -9999px;">
-      <div 
-        id="shareTemplate" 
-        style="width: 650px; font-family: system-ui, -apple-system, sans-serif;" 
+    <div style="position: absolute; left: -9999px; top: -9999px">
+      <div
+        id="shareTemplate"
+        style="
+          width: 650px;
+          font-family:
+            system-ui,
+            -apple-system,
+            sans-serif;
+        "
         class="bg-white p-8 border border-slate-200 rounded-2xl shadow-none"
       >
-        <!-- Encabezado Profesional con Imagen/Logo Alusivo -->
-        <div class="flex items-center justify-between border-b border-slate-200 pb-6 mb-6">
+        <!-- Encabezado Profesional -->
+        <div
+          class="flex items-center justify-between border-b border-slate-200 pb-6 mb-6"
+        >
           <div class="flex items-center gap-4">
-            <!-- Contenedor para Imagen Alusiva / Logo -->
-            <div id="shareLogoContainer" class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-md shrink-0">
+            <!-- Contenedor de Ícono (Centrado Perfecto) -->
+            <div
+              id="shareLogoContainer"
+              class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-md shrink-0 leading-none"
+            >
               🧪
             </div>
-            <div>
-              <h2 class="text-2xl font-bold text-slate-800 tracking-tight">Reporte de Control de Calidad</h2>
-              <p class="text-sm font-medium text-slate-500">Dosificación de Gramos de Caramelo</p>
+            <!-- Texto Encabezado Alineado al Centro Vertical -->
+            <div class="flex flex-col justify-center">
+              <h2
+                class="text-2xl font-bold text-slate-800 tracking-tight leading-tight"
+              >
+                Calidad y Desarrollo
+              </h2>
+              <p class="text-sm font-medium text-slate-500 leading-snug">
+                Dosificación de Gramos de Caramelo
+              </p>
             </div>
           </div>
-          <div class="text-right">
-            <span class="inline-block bg-blue-50 text-blue-700 font-semibold text-xs px-3 py-1 rounded-full border border-blue-200 mb-1">
-              INFORME TÉCNICO
+
+          <!-- Solicitud de Ajuste + Fecha (Alineados Verticalmente) -->
+          <div class="flex flex-col justify-center items-end text-right">
+            <span
+              class="inline-flex items-center justify-center bg-blue-50 text-blue-700 font-semibold text-xs px-3.5 py-1.5 rounded-full border border-blue-200 mb-1.5 tracking-wide uppercase"
+            >
+              SOLICITUD DE AJUSTE
             </span>
-            <p id="shareFecha" class="text-xs font-mono text-slate-400">FECHA: --/--/----</p>
+            <p id="shareFecha" class="text-xs font-mono text-slate-400">
+              FECHA: 2026-08-13
+            </p>
           </div>
         </div>
 
-        <!-- Métricas Principales (Formato Ampliado y Profesional) -->
+        <!-- Métricas Principales -->
         <div class="grid grid-cols-2 gap-4 mb-6">
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Color Obtenido</p>
-            <p id="shareColorObt" class="text-2xl font-mono font-bold text-slate-800">—</p>
+            <p
+              class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+            >
+              Color Obtenido
+            </p>
+            <p
+              id="shareColorObt"
+              class="text-2xl font-mono font-bold text-slate-800"
+            >
+              31
+            </p>
           </div>
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Color Objetivo</p>
-            <p id="shareColorObj" class="text-2xl font-mono font-bold text-slate-800">—</p>
+            <p
+              class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+            >
+              Color Objetivo
+            </p>
+            <p
+              id="shareColorObj"
+              class="text-2xl font-mono font-bold text-slate-800"
+            >
+              30
+            </p>
           </div>
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Volumen Procesado</p>
-            <p id="shareVolumen" class="text-2xl font-mono font-bold text-slate-800">— L</p>
+            <p
+              class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+            >
+              Volumen Procesado
+            </p>
+            <p
+              id="shareVolumen"
+              class="text-2xl font-mono font-bold text-slate-800"
+            >
+              1500 L
+            </p>
           </div>
           <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Parámetros (k1 / k2)</p>
-            <p id="shareConstantes" class="text-xl font-mono font-semibold text-slate-700">— / —</p>
+            <p
+              class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"
+            >
+              Parámetros (k1 / k2)
+            </p>
+            <p
+              id="shareConstantes"
+              class="text-xl font-mono font-semibold text-slate-700"
+            >
+              0.0023 / 0.7673
+            </p>
           </div>
         </div>
 
-        <!-- Tarjeta del Resultado Final Prominente -->
-        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg mb-6 flex items-center justify-between">
-          <div>
-            <p class="text-xs uppercase font-bold tracking-widest text-emerald-100">Resultado Final Calculado</p>
-            <p class="text-4xl font-extrabold font-mono mt-1" id="shareGramosVal">— g</p>
-            <p class="text-xs text-emerald-100 mt-1" id="shareGramosExacto">Valor exacto: —</p>
+        <!-- Tarjeta del Resultado Final (Gramos Corregidos y Separados) -->
+        <div
+          class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-2xl shadow-lg mb-6 flex items-center justify-between"
+        >
+          <div class="flex flex-col justify-between h-full py-0.5">
+            <p
+              class="text-xs uppercase font-bold tracking-widest text-emerald-100"
+            >
+              Resultado Final Calculado
+            </p>
+
+            <!-- Contenedor con espacio dedicado para evitar el solapamiento -->
+            <div class="my-2">
+              <p
+                class="text-4xl font-extrabold font-mono leading-none tracking-tight"
+                id="shareGramosVal"
+              >
+                23 g
+              </p>
+              <p
+                class="text-xs text-emerald-100 mt-3 font-mono leading-tight"
+                id="shareGramosExacto"
+              >
+                Valor exacto: (23.34 g)
+              </p>
+            </div>
           </div>
-          <div class="text-right border-l border-emerald-400/40 pl-6">
-            <div class="text-xs text-emerald-100">Logs Calculados</div>
-            <div class="text-sm font-mono mt-1">log Obt: <span id="shareLogObt" class="font-bold">—</span></div>
-            <div class="text-sm font-mono">log Obj: <span id="shareLogObj" class="font-bold">—</span></div>
+
+          <div
+            class="text-right border-l border-emerald-400/40 pl-6 flex flex-col justify-center"
+          >
+            <div class="text-xs text-emerald-100 mb-1">Logs Calculados</div>
+            <div class="text-sm font-mono leading-relaxed">
+              log Obt: <span id="shareLogObt" class="font-bold">0.5086</span>
+            </div>
+            <div class="text-sm font-mono leading-relaxed">
+              log Obj: <span id="shareLogObj" class="font-bold">0.5229</span>
+            </div>
           </div>
         </div>
 
-        <!-- Pie de página del Reporte -->
-        <div class="flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-100">
+        <!-- Pie de página -->
+        <div
+          class="flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-100"
+        >
           <span>Sistema de Control de Procesos y Laboratorio</span>
           <span>Generado automáticamente</span>
         </div>
@@ -306,9 +468,11 @@
         // DOM Displays
         const logObtDisplay = document.getElementById("logObt");
         const logObjDisplay = document.getElementById("logObj");
-        const gramosRedondeadoSpan = document.getElementById("gramosRedondeado");
+        const gramosRedondeadoSpan =
+          document.getElementById("gramosRedondeado");
         const gramosRealSpan = document.getElementById("gramosReal");
-        const mensajeAdvertencia = document.getElementById("mensajeAdvertencia");
+        const mensajeAdvertencia =
+          document.getElementById("mensajeAdvertencia");
         const btnCompartir = document.getElementById("btnCompartir");
 
         const DEFAULT_K1 = 0.0023;
@@ -348,7 +512,7 @@
 
           // Renderizar resultados en pantalla
           if (gramos !== null) {
-            gramosRedondeadoSpan.textContent = `${Math.round(gramos)} g`;
+            gramosRedondeadoSpan.textContent = `${Math.round(gramos/10)*10} g`;
             gramosRealSpan.textContent = `(${gramos.toFixed(2)} g)`;
           } else {
             gramosRedondeadoSpan.textContent = "—";
@@ -364,23 +528,36 @@
 
         // --- Preparar datos en plantilla invisible ---
         function actualizarPlantillaCompartir() {
-          document.getElementById("shareFecha").textContent = `FECHA: ${fechaInput.value || "N/A"}`;
-          document.getElementById("shareColorObt").textContent = colorObtInput.value || "—";
-          document.getElementById("shareColorObj").textContent = colorObjInput.value || "—";
-          document.getElementById("shareVolumen").textContent = volumenInput.value ? `${volumenInput.value} L` : "— L";
-          document.getElementById("shareConstantes").textContent = `${k1Input.value} / ${k2Input.value}`;
-          
-          document.getElementById("shareLogObt").textContent = logObtDisplay.textContent;
-          document.getElementById("shareLogObj").textContent = logObjDisplay.textContent;
-          
-          document.getElementById("shareGramosVal").textContent = gramosRedondeadoSpan.textContent !== "—" ? gramosRedondeadoSpan.textContent : "— g";
-          document.getElementById("shareGramosExacto").textContent = `Valor exacto: ${gramosRealSpan.textContent || "N/A"}`;
+          document.getElementById("shareFecha").textContent =
+            `FECHA: ${fechaInput.value || "N/A"}`;
+          document.getElementById("shareColorObt").textContent =
+            colorObtInput.value || "—";
+          document.getElementById("shareColorObj").textContent =
+            colorObjInput.value || "—";
+          document.getElementById("shareVolumen").textContent =
+            volumenInput.value ? `${volumenInput.value} L` : "— L";
+          document.getElementById("shareConstantes").textContent =
+            `${k1Input.value} / ${k2Input.value}`;
+
+          document.getElementById("shareLogObt").textContent =
+            logObtDisplay.textContent;
+          document.getElementById("shareLogObj").textContent =
+            logObjDisplay.textContent;
+
+          document.getElementById("shareGramosVal").textContent =
+            gramosRedondeadoSpan.textContent !== "—"
+              ? gramosRedondeadoSpan.textContent
+              : "— g";
+          document.getElementById("shareGramosExacto").textContent =
+            `Valor exacto: ${gramosRealSpan.textContent || "N/A"}`;
         }
 
         // --- Función Exportar / Compartir ---
         async function capturarYCompartir() {
           if (logObtDisplay.textContent === "—") {
-            alert("⚠️ Complete todos los campos requeridos antes de generar el reporte.");
+            alert(
+              "⚠️ Complete todos los campos requeridos antes de generar el reporte.",
+            );
             return;
           }
 
@@ -396,13 +573,23 @@
             });
 
             const blob = await new Promise((resolve) =>
-              canvas.toBlob(resolve, "image/png", 1.0)
+              canvas.toBlob(resolve, "image/png", 1.0),
             );
 
-            if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], "reporte.png", { type: "image/png" })] })) {
-              const file = new File([blob], `Reporte_Caramelo_${fechaInput.value}.png`, {
-                type: "image/png",
-              });
+            if (
+              navigator.share &&
+              navigator.canShare &&
+              navigator.canShare({
+                files: [new File([blob], "reporte.png", { type: "image/png" })],
+              })
+            ) {
+              const file = new File(
+                [blob],
+                `Reporte_Caramelo_${fechaInput.value}.png`,
+                {
+                  type: "image/png",
+                },
+              );
               await navigator.share({
                 title: "Reporte de Gramos de Caramelo",
                 text: `🧪 Resultado del cálculo de dosificación (${fechaInput.value})`,
@@ -434,7 +621,7 @@
           const year = hoy.getFullYear();
           const month = String(hoy.getMonth() + 1).padStart(2, "0");
           const day = String(hoy.getDate()).padStart(2, "0");
-          fechaInput.value = `${year}-${month}-${day}`;
+          fechaInput.value = `${day}-${month}-${year}`;
         }
 
         // Event listeners
