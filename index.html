@@ -1,90 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal de Calidad - Herramientas y Cálculos</title>
     <!-- Tailwind CSS para un diseño limpio y profesional -->
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <!-- <link href="./dist/output.css" rel="stylesheet"> -->
     <!-- <link href="%PUBLIC_URL%/dist/output.css" rel="stylesheet"> -->
-    <link href="dist/output.css" rel="stylesheet">
-</head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
-
+    <link href="dist/output.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="192x192" href="media/icon-app.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="media/icon-app.png" />
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between"
+  >
     <!-- Encabezado -->
     <header class="bg-white border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex items-center justify-between">
-            <div>
-                <h1 class="text-7xl font-bold text-slate-900 tracking-tight">Gestión de Calidad</h1>
-                <p class="text-sm text-slate-500 mt-1 select-auto">Herramientas de cálculo, agilización y formularios</p>
-            </div>
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                Sistema Activo
-            </span>
+      <div
+        class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex items-center justify-between"
+      >
+        <div>
+          <h1 class="text-7xl font-bold text-slate-900 tracking-tight">
+            Gestión de Calidad
+          </h1>
+          <p class="text-sm text-slate-500 mt-1 select-auto">
+            Herramientas de cálculo, agilización y formularios
+          </p>
         </div>
+        <span
+          class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800"
+        >
+          Sistema Activo
+        </span>
+      </div>
     </header>
 
     <!-- Contenido Principal / Menú de Navegación Visual -->
     <main class="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8 w-full flex-grow">
-        <div class="mb-8">
-            <h2 class="text-lg font-semibold text-slate-700">Panel Principal</h2>
-            <p class="text-sm text-slate-500">Seleccione una categoría para comenzar a trabajar.</p>
-        </div>
+      <div class="mb-8">
+        <h2 class="text-lg font-semibold text-slate-700">Panel Principal</h2>
+        <p class="text-sm text-slate-500">
+          Seleccione una categoría para comenzar a trabajar.
+        </p>
+      </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <!-- Vínculo 1: Bottle Receptions -->
-            <a href="pages/bottle-reception-form.html" class="group bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-500 transition-all duration-200 flex flex-col justify-between">
-                <div>
-                    <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        🍾
-                    </div>
-                    <h3 class="text-base font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">Recepción de Botellas</h3>
-                    <p class="text-sm text-slate-500 mt-2">Plantilla para recepción de botellas.</p>
-                </div>
-                <div class="mt-6 flex items-center text-sm font-medium text-blue-600">
-                    Abrir sección <span class="ml-1 group-hover:translate-x-1 transition-transform">&rarr;</span>
-                </div>
-            </a>
-
-            <!-- Vínculo 2: Cálculos -->
-            <a href="pages/caramele-calculate.html" class="group bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition-all duration-200 flex flex-col justify-between">
-                <div>
-                    <div class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                        📊
-                    </div>
-                    <h3 class="text-base font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors">Cálculo Caramelo</h3>
-                    <p class="text-sm text-slate-500 mt-2">Herramientas estadísticas, tamaños de muestra, Cpk, tolerancias y métricas de proceso.</p>
-                </div>
-                <div class="mt-6 flex items-center text-sm font-medium text-emerald-600">
-                    Abrir sección <span class="ml-1 group-hover:translate-x-1 transition-transform">&rarr;</span>
-                </div>
-            </a>
-
-            <!-- Placeholder para futuras páginas (Diseño escalable) -->
-            <div class="bg-slate-100/60 p-6 rounded-xl border border-dashed border-slate-300 flex flex-col justify-between opacity-75">
-                <div>
-                    <div class="w-10 h-10 rounded-lg bg-slate-200 text-slate-400 flex items-center justify-center font-bold text-lg mb-4">
-                        ➕
-                    </div>
-                    <h3 class="text-base font-semibold text-slate-400">Próximamente</h3>
-                    <p class="text-sm text-slate-400 mt-2">Espacio reservado para futuras utilidades del departamento de calidad.</p>
-                </div>
-                <div class="mt-6 text-sm font-medium text-slate-400">
-                    En desarrollo
-                </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Vínculo 1: Bottle Receptions -->
+        <a
+          href="pages/bottle-reception-form.html"
+          class="group bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-500 transition-all duration-200 flex flex-col justify-between"
+        >
+          <div>
+            <div
+              class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-lg mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors"
+            >
+              🍾
             </div>
+            <h3
+              class="text-base font-semibold text-slate-900 group-hover:text-blue-600 transition-colors"
+            >
+              Recepción de Botellas
+            </h3>
+            <p class="text-sm text-slate-500 mt-2">
+              Plantilla para recepción de botellas.
+            </p>
+          </div>
+          <div class="mt-6 flex items-center text-sm font-medium text-blue-600">
+            Abrir sección
+            <span class="ml-1 group-hover:translate-x-1 transition-transform"
+              >&rarr;</span
+            >
+          </div>
+        </a>
 
+        <!-- Vínculo 2: Cálculos -->
+        <a
+          href="pages/caramele-calculate.html"
+          class="group bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-500 transition-all duration-200 flex flex-col justify-between"
+        >
+          <div>
+            <div
+              class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors"
+            >
+              📊
+            </div>
+            <h3
+              class="text-base font-semibold text-slate-900 group-hover:text-emerald-600 transition-colors"
+            >
+              Cálculo Caramelo
+            </h3>
+            <p class="text-sm text-slate-500 mt-2">
+              Herramientas estadísticas, tamaños de muestra, Cpk, tolerancias y
+              métricas de proceso.
+            </p>
+          </div>
+          <div
+            class="mt-6 flex items-center text-sm font-medium text-emerald-600"
+          >
+            Abrir sección
+            <span class="ml-1 group-hover:translate-x-1 transition-transform"
+              >&rarr;</span
+            >
+          </div>
+        </a>
+
+        <!-- Placeholder para futuras páginas (Diseño escalable) -->
+        <div
+          class="bg-slate-100/60 p-6 rounded-xl border border-dashed border-slate-300 flex flex-col justify-between opacity-75"
+        >
+          <div>
+            <div
+              class="w-10 h-10 rounded-lg bg-slate-200 text-slate-400 flex items-center justify-center font-bold text-lg mb-4"
+            >
+              ➕
+            </div>
+            <h3 class="text-base font-semibold text-slate-400">Próximamente</h3>
+            <p class="text-sm text-slate-400 mt-2">
+              Espacio reservado para futuras utilidades del departamento de
+              calidad.
+            </p>
+          </div>
+          <div class="mt-6 text-sm font-medium text-slate-400">
+            En desarrollo
+          </div>
         </div>
+      </div>
     </main>
 
     <!-- Pie de página -->
     <footer class="bg-white border-t border-slate-200 py-4 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
-            Departamento de Calidad &bull; Alojado en GitHub Pages
-        </div>
+      <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
+        Departamento de Calidad &bull; Alojado en GitHub Pages
+      </div>
     </footer>
-
-</body>
+  </body>
 </html>
