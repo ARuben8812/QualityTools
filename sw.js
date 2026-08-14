@@ -8,7 +8,9 @@ const ASSETS_TO_CACHE = [
   './pages/caramele-calculate.html',
   './dist/output.css',
   './media/icon-app.png',
-  './media/logolyv.png'
+  './media/logolyv.png',
+  './media/screenshot-desktop.png',
+  './media/screenshot-mobile.png'   
 ];
 
 // Instalación: Cargar recursos en caché

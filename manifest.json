@@ -10,15 +10,31 @@
   "icons": [
     {
       "src": "media/icon-app.png",
-      "sizes": "192x192",
+      "sizes": "256x256",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "media/icon-app.png",
-      "sizes": "512x512",
+      "sizes": "256x256",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "media/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Panel Principal en Escritorio"
+    },
+    {
+      "src": "media/screenshot-mobile.png",
+      "sizes": "640x1136",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Vista móvil de herramientas"
     }
   ]
 }
