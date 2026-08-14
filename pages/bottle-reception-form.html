@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control de Calidad - Recepción de Botellas</title>
+    <link rel="manifest" href="../manifest.json" />
+    <meta name="theme-color" content="#2563eb" />
     <script src="/JS/logics-1.js"></script>
     <script src="/JS/local-storage-saved.js"></script>
     <script src="/JS/clear.js"></script>
     <link rel="stylesheet" href="/stylesheet-bottles-form.css">    
     <link href="../dist/output.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../media/icon-app.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../media/icon-app.png"
+    />
     
 </head>
 <body>
@@ -421,6 +430,13 @@
             <div>REVISADO Y APROBADO POR: ___________________________</div>
             <div>ALMACEN: ___________________________</div>
         </div>
-    </div>    
+    </div> 
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('../sw.js');
+    });
+  }
+</script>   
 </body>
 </html>

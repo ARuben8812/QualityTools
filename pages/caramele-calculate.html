@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculador de Gramos de Caramelo</title>
+    <link rel="manifest" href="../manifest.json" />
+    <meta name="theme-color" content="#2563eb" />
     <link href="../dist/output.css" rel="stylesheet" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../media/icon-app.png"
+    />
     <style>
       /* Quitar flechas en inputs de número */
       input[type="number"]::-webkit-inner-spin-button,
@@ -512,7 +520,7 @@
 
           // Renderizar resultados en pantalla
           if (gramos !== null) {
-            gramosRedondeadoSpan.textContent = `${Math.round(gramos/10)*10} g`;
+            gramosRedondeadoSpan.textContent = `${Math.round(gramos / 10) * 10} g`;
             gramosRealSpan.textContent = `(${gramos.toFixed(2)} g)`;
           } else {
             gramosRedondeadoSpan.textContent = "—";
@@ -637,6 +645,13 @@
         asignarFechaActual();
         calcular();
       })();
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("../sw.js");
+        });
+      }
     </script>
   </body>
 </html>

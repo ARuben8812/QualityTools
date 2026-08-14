@@ -4,12 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal de Calidad - Herramientas y Cálculos</title>
-    <!-- Tailwind CSS para un diseño limpio y profesional -->
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <!-- <link href="./dist/output.css" rel="stylesheet"> -->
-    <!-- <link href="%PUBLIC_URL%/dist/output.css" rel="stylesheet"> -->
+    <!-- PWA y Favicons -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#2563eb" />
+    <!-- Configuración para iOS / Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Q Tools" />
+    <link rel="apple-touch-icon" sizes="180x180" href="media/icon-app.png" />
+
     <link href="dist/output.css" rel="stylesheet" />
-    <link rel="icon" type="image/png" sizes="192x192" href="media/icon-app.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="media/icon-app.png"
+    />
     <link rel="apple-touch-icon" sizes="180x180" href="media/icon-app.png" />
   </head>
   <body
@@ -134,5 +147,19 @@
         Departamento de Calidad &bull; Alojado en GitHub Pages
       </div>
     </footer>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then((reg) =>
+              console.log("Service Worker de Q Tools activo:", reg.scope),
+            )
+            .catch((err) =>
+              console.error("Error al registrar Service Worker:", err),
+            );
+        });
+      }
+    </script>
   </body>
 </html>
