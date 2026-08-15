@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-50 text-slate-800 antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Calidad - Recepción de Botellas</title>
+    <link rel="manifest" href="../manifest.json" />
+    <meta name="theme-color" content="#1d4ed8" />
+        
+    <script src="../JS/logic-2.js"></script>
+    <script src="../JS/local-storage-saved.js"></script>
+    <script src="../JS/clear.js"></script>
+
+    <link href="../dist/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../stylesheet-bottles-form.css">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="../media/icon-app.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../media/icon-app.png" />
+
+    <style>
+        /* Estilos dedicados exclusivamente a la generación del Reporte Imprimible */
+        @media print {
+            body { background: white; font-size: 11px; }
+            .no-print, nav, button, .fab-button { display: none !important; }
+            #printableReport { display: block !important; }
+            .container-form { display: none !important; }
+        }
+        @media screen {
+            #printableReport { display: none; }
+        }
+    </style>
+</head>
+<body class="min-h-full flex flex-col pb-12">
+
+    <!-- BOTÓN FLOTANTE DE INICIO (FAB) -->
+    <div class="fixed bottom-6 right-6 z-50 no-print">
+        <a href="../index.html" 
+           class="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 active:scale-95 text-white font-medium px-4 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 border border-white/20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>                   
+            <span class="text-sm font-semibold tracking-wide pr-1">Inicio</span>
+        </a>
+    </div>
+
+    <!-- ==================== CONTAINER PRINCIPAL ==================== -->
+    <main class="container-form max-w-5xl mx-auto px-4 py-6 w-full space-y-6">
+        
+        <!-- Header Principal -->
+        <header class="space-y-1">
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+                Recepción de Botellas QA
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-500">
+                Ingresa la información para realizar los cálculos automáticos y generar el reporte oficial.
+            </p>
+        </header>
+
+        <!-- SECCIÓN 1: DATOS GENERALES -->
+        <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 space-y-4">
+            <h2 class="text-base font-bold text-blue-700 uppercase tracking-wider border-b border-slate-100 pb-2">
+                1. Datos Generales de Recepción
+            </h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Fecha:</label>
+                    <input type="date" id="input_fecha" onchange="onDateChange()"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Cliente:</label>
+                    <input type="text" id="input_cliente" placeholder="Nombre del cliente" list="clientes_sugeridos"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                    <datalist id="clientes_sugeridos">
+                        <option value="Lander & Vera"></option>
+                        <option value="Chocomilk"></option>
+                        <option value="MCDA"></option>
+                        <option value="MarFran"></option>
+                        <option value="CDE"></option>
+                        <option value="Edferfra"></option>
+                        <option value="Celiveca"></option>
+                        <option value="Alianza Plast"></option>
+                        <option value="Vidosa"></option>
+                        <option value="Vidrio Lux"></option>
+                        <option value="Eloplast"></option>
+                        <option value="Produvisa"></option>
+                    </datalist>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Proveedor:</label>
+                    <input type="text" id="input_proveedor" placeholder="Nombre del proveedor" list="clientes_sugeridos"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Producto:</label>
+                    <input type="text" id="input_producto" placeholder="Nombre del producto"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-blue-700">Presentación (Rellena P. Lleno):</label>
+                    <input type="number" id="input_presentacion" placeholder="Ej. 750" oninput="autofillPesoLleno()" list="presentacion_sugerida"
+                           class="w-full px-3 py-2 text-sm bg-blue-50/50 border border-blue-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                    <datalist id="presentacion_sugerida">
+                        <option value="1750"></option>
+                        <option value="1000"></option>
+                        <option value="750"></option>
+                        <option value="700"></option>
+                        <option value="350"></option>
+                    </datalist>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Cantidad de Botellas:</label>
+                    <input type="number" id="input_cant_botellas" placeholder="0"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Número de Paletas:</label>
+                    <input type="number" id="input_num_paletas" value="18"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Densidad del Agua:</label>
+                    <input type="text" id="input_densidad" value="1 g/ml"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Código:</label>
+                    <input type="text" id="input_codigo" value="---"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Tipo de Botella:</label>
+                    <div class="flex items-center gap-6 h-10 px-1">
+                        <label class="inline-flex items-center gap-2 text-sm font-medium text-slate-700 cursor-pointer">
+                            <input type="radio" name="tipo_botella" value="PET" checked class="w-4 h-4 text-blue-600 focus:ring-blue-500"> PET
+                        </label>
+                        <label class="inline-flex items-center gap-2 text-sm font-medium text-slate-700 cursor-pointer">
+                            <input type="radio" name="tipo_botella" value="VIDRIO" class="w-4 h-4 text-blue-600 focus:ring-blue-500"> VIDRIO
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-blue-700">Código Juliano (Automático):</label>
+                    <input type="number" id="input_cod_juliano"
+                           class="w-full px-3 py-2 text-sm bg-blue-50/50 border border-blue-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Lote:</label>
+                    <input type="text" id="input_lote"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Número Factura:</label>
+                    <input type="number" id="input_num_factura"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Número de QR:</label>
+                    <input type="text" id="input_num_qr"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: PARÁMETROS CUALITATIVOS -->
+        <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 space-y-4">
+            <h2 class="text-base font-bold text-blue-700 uppercase tracking-wider border-b border-slate-100 pb-2">
+                2. Evaluación de Parámetros Cualitativos
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Punto de Llenado:</label>
+                    <select id="param_punto_llenado" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Punto Frágil:</label>
+                    <select id="param_punto_fragil" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Vidrio Frío:</label>
+                    <select id="param_vidrio_frio" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Dimensiones:</label>
+                    <select id="param_dimensiones" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-1 sm:col-span-2 lg:col-span-1">
+                    <label class="text-xs font-semibold text-slate-600">Superficie Regular:</label>
+                    <select id="param_superficie_regular" class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition">
+                        <option value="OK">CUMPLE (OK)</option>
+                        <option value="NOK">NO CUMPLE (NOK)</option>
+                        <option value="NA">NO APLICA</option>
+                    </select>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: MUESTRAS -->
+        <section class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 space-y-4">
+            <h2 class="text-base font-bold text-blue-700 uppercase tracking-wider border-b border-slate-100 pb-2">
+                3. Mediciones y Ensayos de Muestras
+            </h2>
+
+            <!-- Selector de Cantidad de Muestras -->
+            <div class="flex flex-wrap items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                <label class="text-xs sm:text-sm font-semibold text-slate-700">Cantidad de muestras a evaluar:</label>
+                <select id="sample_count_select" onchange="changeSampleCount()" 
+                        class="px-3 py-1.5 text-sm font-bold bg-white border border-slate-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-600 outline-none">
+                    <option value="8" selected>8 Muestras</option>
+                    <option value="13">13 Muestras</option>
+                </select>
+            </div>
+
+            <!-- Tabla Adaptativa -->
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <table class="w-full text-center text-xs sm:text-sm">
+                    <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200 uppercase tracking-wider">
+                        <tr>
+                            <th class="p-2.5 text-center w-10">#</th>
+                            <th class="p-2.5">P Vacío (g)</th>
+                            <th class="p-2.5">Cavidad</th>
+                            <th class="p-2.5">Observación</th>
+                            <th class="p-2.5">P Lleno</th>
+                            <th class="p-2.5">Volumen (ml)</th>
+                            <th class="p-2.5">Dif (ml)</th>
+                            <th class="p-2.5">Desv</th>                    
+                        </tr>
+                    </thead>
+                    <tbody id="samplesTbody" class="data-table ">
+                        <!-- Filas dinámicas JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tarjetas de Resumen (Summary Grid) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-3 text-center">
+                    <span class="block text-xs font-semibold text-blue-900 mb-1">Vol. Promedio F.P. (ml)</span>
+                    <div id="res_vol_promedio" class="text-xl font-black text-blue-700">0.00</div>
+                </div>
+                <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-3 text-center">
+                    <span class="block text-xs font-semibold text-blue-900 mb-1">Promedio Diferencia</span>
+                    <div id="res_dif_promedio" class="text-xl font-black text-blue-700">0.00</div>
+                </div>
+                <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-3 text-center">
+                    <span class="block text-xs font-semibold text-blue-900 mb-1">Desviación Máxima</span>
+                    <div id="res_desv_maxima" class="text-xl font-black text-blue-700">0.00</div>
+                </div>
+            </div>
+
+            <!-- Entradas Métricas Inferiores -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">F.P. Ref (mm):</label>
+                    <input type="number" id="input_fp_ref"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-blue-700">P. Vacío Mín / Máx (gr) [Auto]:</label>
+                    <input type="text" id="input_p_vacio_minmax" readonly placeholder="Mín / Máx"
+                           class="w-full px-3 py-2 text-sm bg-blue-50/50 border border-blue-300 rounded-lg outline-none font-semibold text-blue-900">
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-600">Profundidad Llenado Mín / Máx (mm):</label>
+                    <input type="text" id="input_prof_llenado_minmax"
+                           class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition">
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-1">
+                <label class="text-xs font-semibold text-slate-600">Observaciones Generales:</label>
+                <textarea id="input_observaciones_gen" rows="2" placeholder="Observaciones adicionales del proceso..."
+                          class="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-blue-600 outline-none transition resize-y"></textarea>
+            </div>
+        </section>
+
+        <!-- BOTONES DE ACCIÓN (TOUCH-FRIENDLY) -->
+        <div class="flex flex-col sm:flex-row gap-3 pt-2 no-print">
+            <button onclick="generateAndPrintReport()" 
+                    class="w-full sm:flex-1 py-3.5 px-4 bg-blue-700 hover:bg-blue-800 active:scale-[0.99] text-white font-bold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                <span>🖨️</span> GENERAR E IMPRIMIR REPORTE
+            </button>
+            <button onclick="clearAllFormData()" 
+                    class="w-full sm:w-auto py-3.5 px-6 bg-red-100 hover:bg-red-200 active:scale-[0.99] text-red-700 font-bold text-sm rounded-xl border border-red-200 transition-all flex items-center justify-center gap-2">
+                <span>🗑️</span> LIMPIAR DATOS
+            </button>
+        </div>
+
+    </main>
+
+    <!-- ============ REPORTE IMPRIMIBLE ============= -->
+    
+    <div id="printableReport">
+        <div>
+            <!-- Encabezado -->
+            <table class="rpt-table">
+                <tr>
+                    <td style="width: 20%; text-align: center; vertical-align: middle;">
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <!-- <img id="rpt_logo_img" src="#" style="max-width: 100%; max-height: 45px; display: none; margin: 0 auto;">  -->
+                            <img id="rpt_logo_img" src="../logolyv.png" alt="Logo" style="max-height: 60px;">
+                            <strong id="rpt_logo_text" style="font-size: 10px;">LANDER & VERA</strong>
+
+                        </div>
+                    </td>
+                    <td style="width: 50%; text-align: center; font-size: 20px; font-weight: bold;">
+                        RECEPCIÓN DE BOTELLAS
+                    </td>
+                    <td style="width: 30%; padding: 0;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 16px;">
+                            <tr><td style="border-bottom: 1px solid black; border-right: none; font-weight: bold;">CODIGO:</td><td style="border-bottom: 1px solid black; border-left: none; text-align: right;">LV-FO-CC-008-00</td></tr>
+                            <tr><td style="border-bottom: 1px solid black; border-right: none; font-weight: bold;">N° DE REV:</td><td style="border-bottom: 1px solid black; border-left: none; text-align: right;">0</td></tr>
+                            <tr><td style="border-right: none; font-weight: bold;">PAGINA:</td><td style="border-left: none; text-align: right;">1 de 1</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Datos Generales -->
+            <table class="rpt-table">
+                <tr>
+                    <td style="width: 38%;"><strong>FECHA:</strong> <span id="rpt_fecha"></span></td>
+                    <td style="width: 32%;"><strong>CANTIDAD BOTELLAS:</strong> <span id="rpt_cant_botellas"></span></td>
+                    <td style="width: 30%;"><strong>CODIGO JULIANO:</strong> <span id="rpt_cod_juliano"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>CLIENTE:</strong> <span id="rpt_cliente"></span></td>
+                    <td><strong>N° DE PALETAS:</strong> <span id="rpt_num_paletas"></span></td>
+                    <td><strong>LOTE:</strong> <span id="rpt_lote"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>PROVEEDOR:</strong> <span id="rpt_proveedor"></span></td>
+                    <td><strong>DENSIDAD DEL AGUA:</strong> <span id="rpt_densidad">1 g/ml</span></td>
+                    <td><strong>N° DE FACTURA:</strong> <span id="rpt_num_factura"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>PRODUCTO:</strong> <span id="rpt_producto"></span></td>
+                    <td><strong>CODIGO:</strong> <span id="rpt_codigo">---</span></td>
+                    <td><strong>N°CONTROL:</strong> ---</td>
+                </tr>
+                <tr>
+                    <td><strong>PRESENTACIÓN:</strong> <span id="rpt_presentacion"></span></td>
+                    <td>
+                        <strong>BOT. PET</strong> <span id="rpt_pet_check">[ ]</span> &nbsp;&nbsp;
+                        <strong>BOT. VIDRIO</strong> <span id="rpt_vidrio_check">[ ]</span>
+                    </td>
+                    <td><strong>#QR:</strong> <span id="rpt_num_qr"></span></td>
+                </tr>
+            </table>
+
+            <!-- Parámetros CUMPLE / NO CUMPLE -->
+            <table class="rpt-table">
+                <tr>
+                    <td style="width: 40%; padding: 0; vertical-align: top;">
+                        <table class="rpt-check-table">
+                            <tr style="font-weight: bold;">
+                                <td style="width: 50%;">PARAMETROS</td>
+                                <td style="width: 25%;">CUMPLE</td>
+                                <td style="width: 25%;">NO CUMPLE</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">PUNTO DE LLENADO:</td>
+                                <td id="rpt_pj_c"></td><td id="rpt_pj_nc"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">VIDRIO FRIO:</td>
+                                <td id="rpt_vf_c"></td><td id="rpt_vf_nc"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">SUPERFICIE REGULAR:</td>
+                                <td id="rpt_sr_c"></td><td id="rpt_sr_nc"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 20%; padding: 0; vertical-align: top;"></td>
+                    <td style="width: 40%; padding: 0; vertical-align: top;">
+                        <table class="rpt-check-table">
+                            <tr style="font-weight: bold;">
+                                <td style="width: 50%;">PARAMETROS</td>
+                                <td style="width: 25%;">CUMPLE</td>
+                                <td style="width: 25%;">NO CUMPLE</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">PUNTO FRAGIL:</td>
+                                <td id="rpt_pf_c"></td><td id="rpt_pf_nc"></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">DIMENSIONES:</td>
+                                <td id="rpt_dim_c"></td><td id="rpt_dim_nc"></td>
+                            </tr>
+                            <tr>
+                                <td style="border-bottom: none;">&nbsp;</td>
+                                <td style="border-bottom: none;"></td><td style="border-bottom: none;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Tabla de Muestras -->
+            <table class="rpt-samples">
+                <thead>
+                    <tr style="font-weight: bold;">
+                        <th style="width: 8%;">MUESTRA</th>
+                        <th style="width: 10%;">P VACIO</th>
+                        <th style="width: 10%;">P LLENO</th>
+                        <th style="width: 11%;">VOLUMEN</th>
+                        <th style="width: 9%;">DIF</th>
+                        <th style="width: 9%;">DESV</th>
+                        <th style="width: 11%;">CAVIDAD</th>
+                        <th style="width: 32%;">OBSERVACIÓN</th>
+                    </tr>
+                </thead>
+                <tbody id="rpt_samples_body">
+                    <!-- Se llena dinámicamente -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right; font-weight: bold;">Totales</td>
+                        <td id="rpt_tot_vol" class="font-bold"></td>
+                        <td id="rpt_tot_dif" class="font-bold"></td>
+                        <td id="rpt_tot_desv" class="font-bold"></td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!-- Secciones Inferiores -->
+            <table class="rpt-table">
+                <tr>
+                    <td style="width: 35%;"><strong>F.P. Ref (mm):</strong> <span id="rpt_fp_ref"></span></td>
+                    <td style="width: 35%;"><strong>Vol. Promedio F.P. (ml):</strong> <span id="rpt_vol_prom_fp"></span></td>
+                    <td style="width: 30%;"><strong>Des. Máx.:</strong> <span id="rpt_desv_max"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>P. Vacío Mín / Máx. (gr):</strong> <span id="rpt_p_vacio_minmax"></span></td>
+                    <td colspan="2"><strong>Profundidad Llenado Mín / Máx (mm):</strong> <span id="rpt_prof_minmax"></span></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height: 110px; vertical-align: top;">
+                        <strong>Observaciones:</strong> <span id="rpt_observaciones_gen"></span>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="font-size: 8.5px; margin-top: 5px;">*F.P. = Filled Point (Punto de Llenado)</div>
+        </div>
+
+        <div class="rpt-signatures">
+            <div>REVISADO Y APROBADO POR: ___________________________</div>
+            <div>ALMACEN: ___________________________</div>
+        </div>
+    </div> 
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../sw.js');
+            });
+        }
+    </script>   
+</body>
+</html>
